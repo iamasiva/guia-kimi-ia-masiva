@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TODO LO QUE PUEDES HACER EN KIMI EN MENOS DE 5 MINUTOS | IA MASIVA</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --ink: #121212;
+      --muted: #5d5b55;
+      --line: #ded9cc;
+      --paper: #fffdf8;
+      --accent: #ff3d2e;
+      --accent-2: #0b6bcb;
+      --lime: #d7ff47;
+      --dark: #080808;
+      --radius: 8px;
+      --shadow: 0 24px 60px rgba(18, 18, 18, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      min-height: 56px;
+      padding: 10px clamp(14px, 4vw, 42px);
+      background: rgba(246, 244, 239, 0.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .brand span:last-child {
+      font-size: 14px;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      color: white;
+      background: var(--dark);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .menu-toggle {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--paper);
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 17px;
+      height: 2px;
+      margin: 0 auto;
+      background: var(--ink);
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .topbar.is-open .menu-toggle span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .topbar.is-open .menu-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .topbar.is-open .menu-toggle span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .nav {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: clamp(14px, 4vw, 42px);
+      display: grid;
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: 10px;
+      width: min(360px, calc(100vw - 28px));
+      padding: 14px;
+      background: var(--paper);
+      border: 1px solid var(--ink);
+      border-radius: var(--radius);
+      box-shadow: 8px 8px 0 var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .topbar.is-open .nav {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .nav a {
+      padding: 10px 11px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--muted);
+      background: white;
+    }
+
+    .nav a:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+      background: var(--lime);
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      align-items: end;
+      padding: clamp(48px, 8vw, 96px) clamp(18px, 5vw, 72px) 28px;
+      background:
+        linear-gradient(135deg, rgba(255, 61, 46, 0.14), transparent 38%),
+        linear-gradient(315deg, rgba(215, 255, 71, 0.45), transparent 32%),
+        var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
+      gap: clamp(28px, 5vw, 72px);
+      align-items: end;
+      width: min(1200px, 100%);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--lime);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    h1 {
+      max-width: 950px;
+      margin: 0;
+      font-size: clamp(46px, 8.4vw, 112px);
+      line-height: 0.92;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .byline {
+      margin: 20px 0 0;
+      font-size: clamp(20px, 2.6vw, 34px);
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 22px);
+    }
+
+    .hero-panel {
+      background: var(--dark);
+      color: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--lime);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-panel p {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.18;
+      font-weight: 850;
+    }
+
+    .intro {
+      padding: 42px clamp(18px, 5vw, 72px);
+      background: var(--dark);
+      color: white;
+    }
+
+    .intro-inner {
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      gap: 32px;
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .intro h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 54px);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .intro p {
+      margin: 0;
+      color: #ddd8ca;
+      font-size: clamp(18px, 2vw, 23px);
+    }
+
+    .quick-map {
+      padding: 38px clamp(18px, 5vw, 72px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .quick-map-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+    }
+
+    .quick-map h2,
+    .section-kicker {
+      margin: 0 0 18px;
+      font-size: 14px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chips a {
+      padding: 10px 14px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--paper);
+      font-weight: 850;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    main {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      padding: clamp(34px, 5vw, 72px) clamp(18px, 4vw, 32px);
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      padding: clamp(26px, 5vw, 56px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .visual {
+      order: 3;
+      overflow: hidden;
+      border: 1px solid var(--ink);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 10px 10px 0 var(--ink);
+    }
+
+    .copy {
+      display: contents;
+      min-width: 0;
+    }
+
+    .number {
+      order: 1;
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 16px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: white;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+    }
+
+    h2 {
+      order: 2;
+      margin: 0;
+      font-size: clamp(31px, 4.8vw, 64px);
+      line-height: 0.98;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      order: 4;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 21px);
+    }
+
+    .use-case {
+      order: 5;
+      margin-top: 22px;
+      padding-left: 18px;
+      border-left: 5px solid var(--accent);
+    }
+
+    .use-case strong,
+    .prompt strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .use-case p {
+      margin: 0;
+      color: #2f2e2a;
+    }
+
+    .prompt {
+      order: 6;
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .prompt code {
+      display: block;
+      color: #2e2c26;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 14px;
+      white-space: normal;
+    }
+
+    .strategy {
+      margin: clamp(28px, 6vw, 78px) 0;
+      padding: clamp(26px, 5vw, 52px);
+      border-radius: var(--radius);
+      background: var(--dark);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .strategy h2 {
+      max-width: 900px;
+      color: white;
+    }
+
+    .strategy p {
+      max-width: 860px;
+      margin: 18px 0 0;
+      color: #ddd8ca;
+      font-size: clamp(18px, 2vw, 23px);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .step {
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .step span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--lime);
+      font-weight: 950;
+    }
+
+    .step p {
+      margin: 0;
+      color: white;
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .closing {
+      padding: clamp(42px, 8vw, 94px) clamp(18px, 5vw, 72px);
+      background: var(--accent);
+      color: white;
+    }
+
+    .closing-inner {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+    }
+
+    .closing h2 {
+      max-width: 1000px;
+      font-size: clamp(40px, 7vw, 96px);
+    }
+
+    .closing p {
+      max-width: 820px;
+      margin: 22px 0 0;
+      font-size: clamp(19px, 2.3vw, 27px);
+      font-weight: 750;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px clamp(18px, 5vw, 72px);
+      background: var(--dark);
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        left: 14px;
+        right: 14px;
+        grid-template-columns: 1fr;
+        width: auto;
+      }
+
+      .hero-grid,
+      .intro-inner,
+      .feature {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      .topbar {
+        position: static;
+      }
+
+      .feature {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="IA MASIVA">
+      <span class="brand-mark">IA</span>
+      <span>IA MASIVA</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="nav" id="site-menu" aria-label="Indice">
+      <a href="#slides">Slides</a>
+      <a href="#websites">Websites</a>
+      <a href="#docs">Docs</a>
+      <a href="#research">Research</a>
+      <a href="#sheets">Sheets</a>
+      <a href="#agents">Agentes</a>
+      <a href="#skills">Skills</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="inicio">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Guia rapida para la comunidad</span>
+        <h1>TODO LO QUE PUEDES HACER EN KIMI EN MENOS DE 5 MINUTOS</h1>
+        <p class="byline">por IA MASIVA</p>
+        <p class="hero-copy">Una ruta directa para entender las funciones clave de Kimi y usarlas como sistema de trabajo: crear, investigar, programar, automatizar y convertir conocimiento en procesos.</p>
+      </div>
+      <aside class="hero-panel">
+        <strong>La idea central</strong>
+        <p>Kimi no es solo un chat. Es una caja de herramientas para transformar trabajo pesado en entregables listos.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="intro-inner">
+      <h2>Primero entiende esto</h2>
+      <p>La mayoria usa la IA para preguntar. Kimi apunta a algo mas potente: usar IA para producir. Presentaciones, sitios web, documentos, investigaciones, hojas de calculo, codigo, agentes y habilidades reutilizables. Si sabes que boton usar, ahorras horas.</p>
+    </div>
+  </section>
+
+  <section class="quick-map">
+    <div class="quick-map-inner">
+      <h2>El mapa rapido</h2>
+      <div class="chips">
+        <a href="#slides">Presentaciones</a>
+        <a href="#websites">Sitios web</a>
+        <a href="#docs">Documentos</a>
+        <a href="#research">Investigacion</a>
+        <a href="#sheets">Excel y datos</a>
+        <a href="#swarm">Agentes paralelos</a>
+        <a href="#code">Codigo</a>
+        <a href="#claw">Automatizacion</a>
+        <a href="#skills">Skills y habilidades</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <article class="feature" id="slides">
+      <div class="visual">
+        <img src="Copia de Captura de pantalla 2026-05-23 a la(s) 8.50.41 a.m. 2.png" alt="Funcion Slides en Kimi">
+      </div>
+      <div class="copy">
+        <span class="number">01 / Slides</span>
+        <h2>Crea presentaciones profesionales con estructura y diseño</h2>
+        <p class="lead">Convierte ideas, documentos largos o reportes en diapositivas claras, ordenadas y listas para presentar.</p>
+        <div class="use-case">
+          <strong>Cuando usarlo</strong>
+          <p>Si tienes un informe pesado y necesitas explicarlo en 10, 15 o 20 slides sin empezar desde una pantalla en blanco.</p>
+        </div>
+        <div class="prompt">
+          <strong>Prompt util</strong>
+          <code>Convierte este informe en una presentacion ejecutiva para inversionistas. Quiero narrativa clara, datos clave, riesgos, oportunidades y conclusion accionable.</code>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature" id="websites">
+      <div class="visual">
+        <img src="Copia de Captura de pantalla 2026-05-23 a la(s) 8.50.41 a.m..png" alt="Funcion Websites en Kimi">
+      </div>
+      <div class="copy">
+        <span class="number">02 / Websites</span>
+        <h2>Pasa de una idea a un sitio web funcional sin programar desde cero</h2>
+        <p class="lead">Describe la pagina que quieres, muestra una referencia visual o parte de un mockup, y Kimi puede ayudarte a generar una version web lista para probar.</p>
+        <div class="use-case">
+          <strong>Cuando usarlo</strong>
+          <p>Para prototipos, landing pages, paginas de producto, MVPs o primeras versiones de una idea digital.</p>
+        </div>
+        <div class="prompt">
+          <strong>Prompt util</strong>
+          <code>Crea una landing page responsive para este producto. Incluye beneficios, precios, testimonios, formulario de registro y CTA principal.</code>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature" id="docs">
+      <div class="visual">
+        <img src="Copia de Captura de pantalla 2026-05-23 a la(s) 8.50.41 a.m. 3.png" alt="Funcion Docs en Kimi">
+      </div>
+      <div class="copy">
+        <span class="number">03 / Docs</span>
+        <h2>Analiza, resume y mejora documentos largos sin perderte en paginas</h2>
+        <p class="lead">Trabaja con PDFs, Word, Markdown y documentos tecnicos para extraer lo importante, revisar contenido y convertirlo en entregables mas utiles.</p>
+        <div class="use-case">
+          <strong>Cuando usarlo</strong>
+          <p>Contratos, propuestas, informes, manuales, papers, politicas internas o cualquier documento que tome demasiado tiempo leer completo.</p>
+        </div>
+        <div class="prompt">
+          <strong>Prompt util</strong>
+          <code>Revisa estos documentos y crea una tabla con puntos clave, riesgos, diferencias, inconsistencias y recomendaciones concretas.</code>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature" id="research">
+      <div class="visual">
+        <img src="Copia de Captura de pantalla 2026-05-23 a la(s) 8.50.41 a.m. 4.png" alt="Funcion Deep Research en Kimi">
+      </div>
+      <div class="copy">
+        <span class="number">04 / Deep Research</span>
+        <h2>Haz investigaciones profundas sin abrir veinte pestañas</h2>
+        <p class="lead">Deep Research busca, compara, sintetiza y organiza informacion compleja en un reporte con criterio.</p>
+        <div class="use-case">
+          <strong>Cuando usarlo</strong>
+          <p>Para analizar empresas, mercados, tendencias, competidores, tecnologias, inversiones o temas donde una respuesta corta no alcanza.</p>
+        </div>
+        <div class="prompt">
+          <strong>Prompt util</strong>
+          <code>Haz una investigacion profunda sobre esta empresa. Analiza mercado, competidores, riesgos, modelo de negocio, proyecciones y oportunidades.</code>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature" id="sheets">
+      <div class="visual">
+        <img src="Copia de Captura de pantalla 2026-05-23 a la(s) 8.50.41 a.m. 5.png" alt="Funcion Sheets en Kimi">
+      </div>
+      <div class="copy">
+        <span class="number">05 / Sheets</span>
+        <h2>Crea hojas de calculo con formulas, tablas y modelos listos</h2>
+        <p class="lead">Genera modelos financieros, dashboards, tablas, CSV, formulas y graficos sin construir todo manualmente.</p>
+        <div class="use-case">
+          <strong>Cuando usarlo</strong>
+          <p>Cuando necesitas ordenar datos, crear un modelo DCF, hacer analisis de sensibilidad o producir una hoja que otra persona pueda usar.</p>
+        </div>
+        <div class="prompt">
+          <strong>Prompt util</strong>
+          <code>Crea un modelo DCF con supuestos, flujo de caja proyectado, WACC, valor terminal, sensibilidad y graficos editables.</code>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature" id="swarm">
+      <div class="visual">
+        <img src="Copia de Captura de pantalla 2026-05-23 a la(s) 8.50.41 a.m. 6.png" alt="Funcion Agent Swarm en Kimi">
+      </div>
+      <div class="copy">
+        <span class="number">06 / Agent Swarm</span>
+        <h2>Divide tareas enormes entre muchos agentes trabajando en paralelo</h2>
+        <p class="lead">Agent Swarm sirve para tareas masivas donde un solo agente se queda corto o tardaria demasiado.</p>
+        <div class="use-case">
+          <strong>Cuando usarlo</strong>
+          <p>Analizar muchas empresas, revisar grandes cantidades de informacion, crear reportes extensos o comparar mercados completos.</p>
+        </div>
+        <div class="prompt">
+          <strong>Prompt util</strong>
+          <code>Divide esta investigacion en subtareas: perfiles, datos financieros, competidores, tendencias, riesgos y reporte ejecutivo final.</code>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature" id="code">
+      <div class="visual">
+        <img src="Copia de Captura de pantalla 2026-05-23 a la(s) 8.50.41 a.m. 7.png" alt="Funcion Kimi Code en Kimi">
+      </div>
+      <div class="copy">
+        <span class="number">07 / Kimi Code</span>
+        <h2>Haz que la IA entienda tu repositorio y trabaje con codigo real</h2>
+        <p class="lead">Kimi Code puede analizar proyectos, ejecutar comandos, refactorizar, corregir errores y ayudar en tareas tecnicas de desarrollo.</p>
+        <div class="use-case">
+          <strong>Cuando usarlo</strong>
+          <p>Para migraciones, bugs, refactors, pruebas, lectura de codigo legacy o automatizacion de tareas repetitivas de programacion.</p>
+        </div>
+        <div class="prompt">
+          <strong>Prompt util</strong>
+          <code>Analiza este repositorio, identifica los archivos relevantes, aplica la migracion solicitada y ejecuta las pruebas hasta que todo pase.</code>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature" id="claw">
+      <div class="visual">
+        <img src="Copia de Captura de pantalla 2026-05-23 a la(s) 8.50.41 a.m. 8.png" alt="Funcion Kimi Claw en Kimi">
+      </div>
+      <div class="copy">
+        <span class="number">08 / Kimi Claw</span>
+        <h2>Automatiza tareas recurrentes con un agente que sigue trabajando</h2>
+        <p class="lead">Kimi Claw apunta a tareas persistentes: monitorear, investigar, reportar y repetir procesos con continuidad.</p>
+        <div class="use-case">
+          <strong>Cuando usarlo</strong>
+          <p>Para reportes diarios, seguimiento de mercado, monitoreo de noticias, alertas, revision de competidores o flujos programados.</p>
+        </div>
+        <div class="prompt">
+          <strong>Prompt util</strong>
+          <code>Cada dia a las 7:00 a.m., analiza Bitcoin: precio, noticias, niveles clave, tendencia y escenarios posibles. Entrega resumen accionable.</code>
+        </div>
+      </div>
+    </article>
+
+    <section class="strategy" id="agents">
+      <span class="section-kicker">Estrategia IA MASIVA</span>
+      <h2>No uses todas las funciones. Usa la funcion correcta para el cuello de botella correcto.</h2>
+      <p>Si el problema es explicar, usa Slides. Si el problema es investigar, usa Deep Research. Si el problema es repetir un proceso, usa Presets o Skills. Si el problema es escalar una tarea, usa Agent Swarm o Claw.</p>
+      <div class="steps">
+        <div class="step">
+          <span>01</span>
+          <p>Identifica que parte del trabajo te roba mas tiempo.</p>
+        </div>
+        <div class="step">
+          <span>02</span>
+          <p>Elige la funcion de Kimi que convierte ese trabajo en entregable.</p>
+        </div>
+        <div class="step">
+          <span>03</span>
+          <p>Guarda el proceso como preset o skill si lo vas a repetir.</p>
+        </div>
+      </div>
+    </section>
+
+    <article class="feature" id="skills">
+      <div class="visual">
+        <img src="Copia de Captura de pantalla 2026-05-23 a la(s) 9.02.01 a.m..png" alt="Funcion Skills y Document to Skills en Kimi">
+      </div>
+      <div class="copy">
+        <span class="number">09 / Skills</span>
+        <h2>Convierte procesos, documentos y prompts en habilidades reutilizables</h2>
+        <p class="lead">Skills es la zona donde Kimi deja de ser solo un chat y empieza a comportarse como un sistema de trabajo. Aqui puedes usar habilidades ya creadas, crear nuevas hablando con Kimi, convertir documentos en habilidades y gestionar las que ya tienes.</p>
+        <div class="use-case">
+          <strong>Que incluye esta seccion</strong>
+          <p><strong>Habilidades:</strong> utilidades listas para tareas especificas como investigar, crear documentos, trabajar con PDFs o manipular hojas de calculo. <strong>Document to Skill:</strong> convierte archivos de Office o documentos internos en una habilidad reutilizable. <strong>Create with Kimi:</strong> permite crear una habilidad conversando con Kimi. <strong>Manage Skills:</strong> sirve para administrar las habilidades disponibles.</p>
+        </div>
+        <div class="use-case">
+          <strong>Cuando usarlo</strong>
+          <p>Cuando tienes un workflow que vas a repetir muchas veces: una metodologia de analisis, una plantilla de contenido, un proceso de investigacion, una guia interna o un documento que quieres transformar en accion.</p>
+        </div>
+        <div class="prompt">
+          <strong>Prompt util</strong>
+          <code>Convierte este documento en una skill reutilizable. Debe aplicar la metodologia paso a paso, pedir los datos necesarios y entregar un resultado estandarizado.</code>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <section class="closing">
+    <div class="closing-inner">
+      <h2>La ventaja no es conocer Kimi. Es saber donde meterlo en tu flujo de trabajo.</h2>
+      <p>La IA deja de ser juguete cuando la conectas con tareas reales: documentos, presentaciones, investigacion, datos, codigo y automatizacion. Ahi es donde empieza el salto.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>IA MASIVA</span>
+    <span>Guia rapida de funciones Kimi</span>
+  </footer>
+  <script>
+    const topbar = document.querySelector(".topbar");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const menuLinks = document.querySelectorAll(".nav a, .brand");
+
+    function setMenu(open) {
+      topbar.classList.toggle("is-open", open);
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.setAttribute("aria-label", open ? "Cerrar menu" : "Abrir menu");
+    }
+
+    menuToggle.addEventListener("click", () => {
+      setMenu(!topbar.classList.contains("is-open"));
+    });
+
+    menuLinks.forEach((link) => {
+      link.addEventListener("click", () => setMenu(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setMenu(false);
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!topbar.contains(event.target)) setMenu(false);
+    });
+  </script>
+</body>
+</html>
